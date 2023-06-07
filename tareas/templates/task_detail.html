@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 py-4">
+                <h1 class="text-secundary">{{tarea.title}} </h1>
+
+                {{error}}
+
+                <div class="mt-5 d-flex"> 
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button class="btn btn-primary">
+                            Update
+                        </buttton>
+                    </form>
+                </div>
+                <div class="mt-5 d-flex">    
+                    <!-- Boton completar tarea-->
+                    <form action="{% url 'complete_task' tarea.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-success">
+                            Complete
+                        </buttton>
+                    </form>
+
+                    <!-- Boton elimnar tarea-->
+                    <form action="{% url 'delete_task' tarea.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">
+                            Delete
+                        </buttton>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %} 
